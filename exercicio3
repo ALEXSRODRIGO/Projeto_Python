@@ -1,0 +1,18 @@
+from tkinter import *
+calculadora = Tk()
+calculadora["bg"] = "blue"
+app = Frame(calculadora)
+app.grid()
+
+labelMsg = Label(calculadora, text="Informe um valor:",font="Times", bg = "blue", foreground="black")
+labelMsg.place(x=100, y=100)
+
+varValor1= Entry(calculadora)
+varValor1.place(x=100,y=130)
+
+titleVar ="Calculadora"
+calculadora.title(titleVar)
+calculadora.geometry("400x500")
+calculadora.resizable(True,False)
+calculadora.mainloop()
+calculadora.destroy()

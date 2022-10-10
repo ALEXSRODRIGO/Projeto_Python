@@ -1,6 +1,13 @@
 import tkinter as tk
+
+import mysql.connector
+#cmd ....pip install mysql-connector
+
 #from PIL import ImageTk, Image
 #from numpy import Imag
+
+def conexao():
+        conexao = mysql.connector.connect(host="localhost",user="root",passwd="",db="usuarios")
 
 
 def cadastrarUsuarios():
@@ -71,8 +78,7 @@ fileMenu.add_command(label="Cadastrar Usuários"
             ,command=cadastrarUsuarios)
 fileMenu.add_command(label="Cadastrar Produtos"
             ,command=cadastrarProdutos)
-menuPrincipal.add_cascade(label="Funcao"
-                        ,menu=fileMenu)
+menuPrincipal.add_cascade(label="Funcao"    ,menu=fileMenu)
 
 #buttonExample = tk.Button(app, 
 #              text="Create new window",

@@ -152,16 +152,24 @@ def abrirTelaUsuarios():
     def atualizaUsuario(usuario):
            conn = conexao()
            cursor = conn.cursor()
-           #cursor.execute(
-           #f"UPDATE usuarios(id, nome, sobrenome, cidade, estado, data_nascimento)" f"VALUES('{usuario.id}','{usuario.nome}','{usuario.sobrenome}','{usuario.cidade}','{usuario.estado}','{usuario.data_nascimento}')WHERE ")
-           conn.commit()
-           desconectar(conn)
+           if(entryId.get()):
+                #%s 
+                sql = "UPDATE usuarios set nome = %s, sobrenome = %s, cidade = %s, estado = %s, data_nascimento = %s where id = %s"       
+                #f"UPDATE usuarios(id, nome, sobrenome, cidade, estado, data_nascimento)" f"VALUES('{usuario.id}','{usuario.nome}','{usuario.sobrenome}','{usuario.cidade}','{usuario.estado}','{usuario.data_nascimento}')WHERE ")
+                val = (f'{usuario.nome}',f'{usuario.sobrenome}',f'{usuario.cidade}',f'{usuario.estado}',f'{usuario.data_nascimento}',f'{entryId.get()}')
+                
+                cursor.execute(sql,val)
+                conn.commit()
+                desconectar(conn)
+           else:
+                showinfo(title='Informação',message='Erro, Id não informado')  
                
     def updateUsuario():
-           usuario = Usuarios(None,entryNome.get(),entrySobrenome.get(),entryCidade.get(),entryEstado.get(),entryDataNascimento.get())
+           usuario = Usuarios(entryNome.get(),entrySobrenome.get(),entryCidade.get(),entryEstado.get(),entryDataNascimento.get(),entryId.get())
            atualizaUsuario(usuario)
+           selecionarUsuarios(janelaUsuarios)
                
-    btnUpdate = tk.Button(janelaUsuarios,width=20,text="Atualizar", command=updateUsuario)
+    btnUpdate = tk.Button(janelaUsuarios,width=20,text="Atualizar", command=updateUsuario,state= tk.ACTIVE)
     btnUpdate.place(x=300,y=430)
 
     def excluirUsuario():
@@ -177,7 +185,7 @@ def abrirTelaUsuarios():
                 showinfo(title='Informação',message='Erro, Id não informado')
            
     
-    btnDelete = tk.Button(janelaUsuarios,width=20,text="Excluir", command=excluirUsuario)
+    btnDelete = tk.Button(janelaUsuarios,width=20,text="Excluir", command=excluirUsuario,state= tk.ACTIVE)
     btnDelete.place(x=500,y=430)
 
            
